@@ -4523,11 +4523,11 @@ h6 a:hover {
 .checkoutHeader-heading {
   font-size: 2.76923rem;
   color: inherit;
+  display: flex;
   margin-bottom: 0;
   word-wrap: break-word; }
 
 .checkoutHeader-link {
-  display: block;
   margin-left: auto;
   margin-right: auto; }
 
@@ -5459,4 +5459,4 @@ body.klarna-payments-fso-open {
     font-weight: normal; }
 
 
-/*# sourceMappingURL=checkout-1086e896.css.map*/
+/*# sourceMappingURL=checkout-f3e191a8.css.map*/
