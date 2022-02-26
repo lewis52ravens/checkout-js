@@ -1,6 +1,6 @@
 {
   "name": "@bigcommerce/checkout",
-  "version": "1.196.1-alpha.1645544109472",
+  "version": "1.196.1-alpha.1645909397823",
   "private": true,
   "description": "Browser-based application providing a seamless UI for BigCommerce shoppers to complete their checkout.",
   "license": "MIT",
@@ -121,7 +121,7 @@
     "terser-webpack-plugin": "^2.1.2",
     "ts-jest": "^24.0.2",
     "ts-loader": "^8.0.2",
-    "tslib": "^1.10.0",
+    "tslib": "^1.14.1",
     "tslint": "^5.18.0",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
