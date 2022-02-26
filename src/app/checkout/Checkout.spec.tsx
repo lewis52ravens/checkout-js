@@ -218,6 +218,9 @@ describe('Checkout', () => {
             .toEqual(CheckoutStepType.Billing);
 
         expect(steps.at(3).prop('type'))
+            .toEqual(CheckoutStepType.Schedule);
+
+        expect(steps.at(4).prop('type'))
             .toEqual(CheckoutStepType.Payment);
     });
 

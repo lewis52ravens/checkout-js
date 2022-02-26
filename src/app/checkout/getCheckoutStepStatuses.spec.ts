@@ -424,6 +424,7 @@ describe('getCheckoutStepStatuses()', () => {
                 CheckoutStepType.Customer,
                 CheckoutStepType.Shipping,
                 CheckoutStepType.Billing,
+                CheckoutStepType.Schedule,
                 CheckoutStepType.Payment,
             ]);
     });

@@ -54,6 +54,11 @@ const Shipping = lazy(() => retry(() => import(
     '../shipping/Shipping'
 )));
 
+const Schedule = lazy(() => retry(() => import(
+    /* webpackChunkName: "schedule" */
+    '../schedule/Schedule'
+)));
+
 export interface CheckoutProps {
     checkoutId: string;
     containerId: string;
@@ -260,6 +265,9 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
         case CheckoutStepType.Customer:
             return this.renderCustomerStep(step);
 
+        case CheckoutStepType.Schedule:
+            return this.renderScheduleStep(step);
+
         case CheckoutStepType.Shipping:
             return this.renderShippingStep(step);
 
@@ -272,6 +280,43 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
         default:
             return null;
         }
+    }
+
+    private renderScheduleStep(step: CheckoutStepStatus): ReactNode {
+        const {
+            hasCartChanged,
+            cart,
+        } = this.props;
+
+        const {
+            hasSelectedShippingOptions: hasSelectedShipping,
+        } = this.state;
+
+        if (!cart) {
+            return;
+        }
+
+        return (
+            <CheckoutStep
+                { ...step }
+                heading={ 'Scheduling' }
+                key={ step.type }
+                onEdit={ this.handleEditStep }
+                onExpanded={ this.handleExpanded }
+                summary={ <p>Scheduling Summary</p> }
+            >
+                <LazyContainer>
+                    <Schedule
+                        hasCartChanged={ hasCartChanged }
+                        isReady={ hasSelectedShipping }
+                        navigateNextStep={ this.navigateToNextIncompleteStep }
+                        onReady={ this.handleReady }
+                        onUnhandledError={ this.handleUnhandledError }
+                    />
+                </LazyContainer>
+            </CheckoutStep>
+        );
+
     }
 
     private renderCustomerStep(step: CheckoutStepStatus): ReactNode {

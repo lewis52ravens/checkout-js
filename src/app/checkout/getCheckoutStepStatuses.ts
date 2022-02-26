@@ -112,16 +112,33 @@ const getPaymentStepStatus = createSelector(
     }
 );
 
+const getScheduleStepStatus = createSelector(
+    ({ data }: CheckoutSelectors) => data.getOrder(),
+    order => {
+        const isComplete = order ? order.isComplete : false;
+
+        return {
+            type: CheckoutStepType.Schedule,
+            isActive: false,
+            isComplete,
+            isEditable: isComplete,
+            isRequired: true,
+        };
+    }
+);
+
 const getCheckoutStepStatuses = createSelector(
     getCustomerStepStatus,
     getShippingStepStatus,
     getBillingStepStatus,
+    getScheduleStepStatus,
     getPaymentStepStatus,
-    (customerStep, shippingStep, billingStep, paymentStep) => {
+    (customerStep, shippingStep, billingStep, scheduleStep, paymentStep) => {
         const steps = compact([
             customerStep,
             shippingStep,
             billingStep,
+            scheduleStep,
             paymentStep,
         ]);
 
