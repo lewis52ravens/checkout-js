@@ -30,12 +30,12 @@
     @include headingStyle("h1");
 
     color: inherit;
+    display: flex;
     margin-bottom: 0;
     word-wrap: break-word;
 }
 
 .checkoutHeader-link {
-    display: block;
     margin-left: auto;
     margin-right: auto;
 }
