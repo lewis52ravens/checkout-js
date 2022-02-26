@@ -4526,6 +4526,11 @@ h6 a:hover {
   margin-bottom: 0;
   word-wrap: break-word; }
 
+.checkoutHeader-link {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
 .checkoutHeader-logo {
   max-height: 100px; }
 
@@ -5454,4 +5459,4 @@ body.klarna-payments-fso-open {
     font-weight: normal; }
 
 
-/*# sourceMappingURL=checkout-17ca52ad.css.map*/
+/*# sourceMappingURL=checkout-1086e896.css.map*/
