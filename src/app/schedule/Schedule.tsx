@@ -2,6 +2,7 @@ import { Address, Cart, CheckoutRequestBody, CheckoutSelectors, ShippingOption }
 import React, { Component, ReactNode } from 'react';
 
 import { withCheckout, CheckoutContextProps } from '../checkout';
+import { LoadingOverlay } from '../ui/loading';
 // import { getShippableItemsCount } from '../shipping';
 // import getShippingMethodId from '../shipping/getShippingMethodId';
 
@@ -54,10 +55,15 @@ class Schedule extends Component<ScheduleProps & WithCheckoutScheduleProps, Sche
 
         return (
             <div className="checkout-form">
-                <p>
-                    This is the
-                    { name }
-                </p>
+                <LoadingOverlay
+                    isLoading={ isInitializing }
+                    unmountContentWhenLoading
+                >
+                    <p>
+                        This is the
+                        { name }
+                    </p>
+                </LoadingOverlay>
             </div>
         );
     }
