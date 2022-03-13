@@ -44,7 +44,7 @@ const CustomerInfo: FunctionComponent<CustomerInfoProps & WithCheckoutCustomerIn
                 await signOut();
                 onSignOut({ isCartEmpty: false });
             }
-        } catch (error) {
+        } catch (error: any) {
             if (error.type === 'checkout_not_available') {
                 onSignOut({ isCartEmpty: true });
             } else {

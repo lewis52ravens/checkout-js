@@ -1,0 +1,63 @@
+@import './Calendar.css';
+//@import '../../../node_modules/bootstrap/scss/bootstrap-grid.scss';
+//@import '../../../node_modules/bootstrap/scss/containers';
+//@import '../../../node_modules/bootstrap/scss/list-group';
+
+$disabled_color: #d3d3d4;
+
+.Calendar {
+
+    &__container {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        padding: 10px;
+
+        & > * {
+            & > * {
+                margin: 10px;
+            }
+        }
+
+        &__content {
+            align-items: stretch;
+            display: flex;
+            flex-basis: 420px;
+            flex-direction: column;
+            flex-grow: 100;
+            max-width: 100%;
+            padding-top: 1em;
+
+            .react-calendar {
+                //margin: 0 auto;
+
+                .Day {
+                    //&__Disabled
+
+                    &__Unavailable {
+                        background-color: $disabled_color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.TimeSlots {
+    align-items: center;
+    //background-color: pink;
+    display: flex;
+    height: 100%;
+    justify-content: flex-start;
+    width: 100%;
+    
+
+    .list-group {
+
+        .list-group-item.disabled {
+            background-color: $disabled_color;
+        }
+    }
+}

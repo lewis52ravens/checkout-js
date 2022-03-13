@@ -103,7 +103,7 @@ class Payment extends Component<PaymentProps & WithCheckoutPaymentProps & WithLa
         try {
             await finalizeOrderIfNeeded();
             onFinalize();
-        } catch (error) {
+        } catch (error: any) {
             if (error.type !== 'order_finalization_not_required') {
                 onFinalizeError(error);
             }
@@ -220,7 +220,7 @@ class Payment extends Component<PaymentProps & WithCheckoutPaymentProps & WithLa
 
         try {
             checkEmbeddedSupport(methods.map(({ id }) => id));
-        } catch (error) {
+        } catch (error: any) {
             return (
                 <ErrorModal
                     error={ error }
@@ -335,7 +335,7 @@ class Payment extends Component<PaymentProps & WithCheckoutPaymentProps & WithLa
             const { body, headers, status } = error;
 
             if (body.type === 'provider_error' && headers.location) {
-                window.top.location.assign(headers.location);
+                window.top?.location.assign(headers.location);
             }
 
             // Reload the checkout object to get the latest `shouldExecuteSpamCheck` value,
@@ -393,7 +393,7 @@ class Payment extends Component<PaymentProps & WithCheckoutPaymentProps & WithLa
         try {
             await submitOrder(mapToOrderRequestBody(values, isPaymentDataRequired()));
             onSubmit();
-        } catch (error) {
+        } catch (error: any) {
             if (error.type === 'payment_method_invalid') {
                 return loadPaymentMethods();
             }

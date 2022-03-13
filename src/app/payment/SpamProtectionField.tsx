@@ -88,7 +88,7 @@ class SpamProtectionField extends Component<
 
         try {
             await executeSpamCheck();
-        } catch (error) {
+        } catch (error: any) {
             this.setState({ shouldShowRetryButton: true });
 
             // Notify the parent component if the user experiences a problem other than cancelling the reCaptcha challenge.

@@ -321,7 +321,7 @@ class Customer extends Component<CustomerProps & WithCheckoutCustomerProps, Cust
             await this.executePaymentMethodCheckoutOrContinue();
 
             this.draftEmail = undefined;
-        } catch (error) {
+        } catch (error: any) {
             if (error.type === 'update_subscriptions' || error.type === 'payment_method_client_invalid') {
                 this.draftEmail = undefined;
 

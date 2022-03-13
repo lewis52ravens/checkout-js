@@ -1,0 +1,62 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Server",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev:server"
+            ],
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/dist/*.js",
+                "${workspaceFolder}/build/*.js",
+                "!**/node_modules/**"
+            ],
+            "outputCapture": "console",
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/dist/**",
+                "!**/node_modules/**"
+            ],
+            "localRoot": "${workspaceFolder}/build",
+            "sourceMaps": true,
+            "smartStep": true,
+            "trace": true,
+            "type": "pwa-node"
+        },
+        {
+            "name": "Launch Watcher",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev"
+            ],
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "Attach checkout debugger Chrome",
+            "type": "pwa-chrome",
+            "request": "attach",
+            "urlFilter": "*/checkout",
+            "address": "http://localhost:3000",
+            "smartStep": true
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch All",
+            "configurations": ["Launch Watcher", "Launch Server"]
+        }
+    ]
+}

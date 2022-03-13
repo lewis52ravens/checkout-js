@@ -74,3 +74,16 @@
 // =============================================================================
 
 @import "layouts/layouts";
+
+// =============================================================================
+// Bootstrap Components
+// =============================================================================
+
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+@import "../../node_modules/bootstrap/scss/bootstrap-grid";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/list-group";

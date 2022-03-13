@@ -175,7 +175,7 @@ class MultiShippingForm extends PureComponent<MultiShippingFormProps & WithLangu
 
         try {
             await createCustomerAddress(shippingAddress);
-        } catch (e) {
+        } catch (e: any) {
             this.setState({ createCustomerAddressError: e });
         }
 
@@ -228,7 +228,7 @@ class MultiShippingForm extends PureComponent<MultiShippingFormProps & WithLangu
             });
 
             this.syncItems(itemKey, address, data);
-        } catch (e) {
+        } catch (e: any) {
             onUnhandledError(new AssignItemFailedError(e));
         }
     };

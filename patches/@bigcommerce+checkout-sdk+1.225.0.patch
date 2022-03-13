@@ -1,0 +1,13 @@
+diff --git a/node_modules/@bigcommerce/checkout-sdk/dist/checkout-sdk.d.ts b/node_modules/@bigcommerce/checkout-sdk/dist/checkout-sdk.d.ts
+index 0de78a5..aae44d8 100644
+--- a/node_modules/@bigcommerce/checkout-sdk/dist/checkout-sdk.d.ts
++++ b/node_modules/@bigcommerce/checkout-sdk/dist/checkout-sdk.d.ts
+@@ -536,7 +536,7 @@ declare interface AmazonPayWidgetError extends Error {
+     getErrorCode(): string;
+ }
+ 
+-declare type AnalyticStepType = 'customer' | 'shipping' | 'billing' | 'payment';
++declare type AnalyticStepType = 'customer' | 'shipping' | 'billing' | 'schedule' | 'payment';
+ 
+ /**
+  * A set of options that are required to initialize ApplePay in cart.

@@ -6,6 +6,8 @@
       "max-line-length": false,
       "object-literal-sort-keys": false,
       "no-trailing-whitespace": [true, "ignore-comments", "ignore-jsdoc", "ignore-blank-lines"],
-      "comment-format": false
+      "comment-format": false,
+      "quotemark": false,
+      "ordered-imports": false
     }
 }

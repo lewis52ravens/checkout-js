@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "release:alpha",
+			"problemMatcher": [],
+			"label": "npm: release:alpha",
+			"detail": "npm run lint && npm run test -- --coverage && npm run build -- --prerelease && npm run release:version",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"detail": "webpack --mode development --watch"
+		}
+	]
+}

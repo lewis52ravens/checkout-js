@@ -47,7 +47,7 @@ class Billing extends Component<BillingProps & WithCheckoutBillingProps> {
         try {
             await initialize();
             onReady();
-        } catch (e) {
+        } catch (e: any) {
             onUnhandledError(e);
         }
     }
@@ -109,7 +109,7 @@ class Billing extends Component<BillingProps & WithCheckoutBillingProps> {
             await Promise.all(promises);
 
             navigateNextStep();
-        } catch (error) {
+        } catch (error: any) {
             onUnhandledError(error);
         }
     };

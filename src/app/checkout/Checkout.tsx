@@ -23,6 +23,8 @@ import CheckoutStep from './CheckoutStep';
 import CheckoutStepStatus from './CheckoutStepStatus';
 import CheckoutStepType from './CheckoutStepType';
 import CheckoutSupport from './CheckoutSupport';
+import { TimeSlot } from '../schedule/ScheduleInfo';
+import { ScheduleSummary } from '../schedule/ScheduleSummary';
 
 const Billing = lazy(() => retry(() => import(
     /* webpackChunkName: "billing" */
@@ -80,6 +82,7 @@ export interface CheckoutState {
     isCartEmpty: boolean;
     isRedirecting: boolean;
     hasSelectedShippingOptions: boolean;
+    selectedTime?: TimeSlot;
 }
 
 export interface WithCheckoutProps {
@@ -183,7 +186,7 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
             } else {
                 this.handleReady();
             }
-        } catch (error) {
+        } catch (error: any) {
             this.handleUnhandledError(error);
         }
     }
@@ -290,8 +293,9 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
 
         const {
             hasSelectedShippingOptions: hasSelectedShipping,
+            selectedTime,
         } = this.state;
-
+        
         if (!cart) {
             return;
         }
@@ -303,15 +307,21 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
                 key={ step.type }
                 onEdit={ this.handleEditStep }
                 onExpanded={ this.handleExpanded }
-                summary={ <p>Scheduling Summary</p> }
+                summary={
+                    <ScheduleSummary
+                        timeSlot={ selectedTime }
+                    />
+                }
             >
                 <LazyContainer>
                     <Schedule
                         hasCartChanged={ hasCartChanged }
                         isReady={ hasSelectedShipping }
-                        navigateNextStep={ this.navigateToNextIncompleteStep }
+                        navigateNextStep={ this.handleScheduleNextStep }
                         onReady={ this.handleReady }
                         onUnhandledError={ this.handleUnhandledError }
+                        onTimeSlotSelected={ this.handleTimeSlotUpdated }
+                        timeSlot={ selectedTime }
                     />
                 </LazyContainer>
             </CheckoutStep>
@@ -501,7 +511,9 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
         } else {
             this.setState({ activeStepType: step.type });
         }
-
+        if (step.type === CheckoutStepType.Schedule) {
+            step.isActive = true;
+        }
         if (error) {
             clearError(error);
         }
@@ -511,6 +523,23 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
         const { isMultiShippingMode } = this.state;
 
         this.setState({ isMultiShippingMode: !isMultiShippingMode });
+    };
+
+    private handleScheduleNextStep: (isTimeSelected: boolean) => void = isTimeSelected => {
+        const { steps } = this.props;
+        const activeStepIndex = findIndex(steps, { isActive: true });
+        const activeStep = activeStepIndex >= 0 && steps[activeStepIndex];
+        if (!activeStep || activeStep.type != CheckoutStepType.Schedule) {
+            this.navigateToNextIncompleteStep();
+            return;
+        }
+        if (isTimeSelected) {
+            const nextStep = steps[Math.min(activeStepIndex + 1), steps.length-1];
+            activeStep.isActive = false;
+            activeStep.isComplete = true;
+            activeStep.isEditable = true;
+            this.navigateToStep(nextStep.type);
+        }
     };
 
     private navigateToNextIncompleteStep: (options?: { isDefault?: boolean }) => void = options => {
@@ -556,6 +585,10 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
     private handleCartChangedError: (error: CartChangedError) => void = () => {
         this.navigateToStep(CheckoutStepType.Shipping);
     };
+
+    private handleTimeSlotUpdated: (newSlot: TimeSlot) => void = (newSlot) => {
+        this.setState({ selectedTime: newSlot });
+    }
 
     private handleConsignmentsUpdated: (state: CheckoutSelectors) => void = ({ data }) => {
         const {
@@ -629,7 +662,7 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
             this.setState({ isCartEmpty: true });
 
             if (!isEmbedded()) {
-                return window.top.location.assign(loginUrl);
+                return window.top?.location.assign(loginUrl);
             }
         }
 
@@ -663,7 +696,7 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
         if (customerViewType === CustomerViewType.CreateAccount &&
             (!canCreateAccountInCheckout || isEmbedded())
         ) {
-            window.top.location.replace(createAccountUrl);
+            window.top?.location.replace(createAccountUrl);
 
             return;
         }

@@ -1,5 +1,8 @@
 module.exports = {
-    extends: 'stylelint-config-standard',
+    extends: [
+        'stylelint-config-standard-scss',
+        'stylelint-config-prettier-scss'
+    ],
     plugins: ['stylelint-order'],
     rules: {
         indentation: 4,
@@ -9,5 +12,33 @@ module.exports = {
         'at-rule-empty-line-before': null,
         'selector-type-no-unknown': null,
         'no-descending-specificity': null,
+        //Added rules for v14
+        'rule-empty-line-before': null,
+        'declaration-empty-line-before': null,
+        'scss/dollar-variable-pattern': null,
+        'scss/comment-no-empty': null,
+        'scss/dollar-variable-colon-space-after': null,
+        'value-keyword-case': null,
+        'scss/dollar-variable-empty-line-before': null,
+        'max-line-length': 160,
+        'scss/no-global-function-names': null,
+        'scss/double-slash-comment-whitespace-inside': null,
+        'color-function-notation': null,
+        'alpha-value-notation': null,
+        'selector-class-pattern': null,
+        'scss/at-mixin-pattern': null,
+        'scss/at-if-closing-brace-newline-after': null,
+        'scss/at-else-closing-brace-newline-after': null,
+        'scss/at-else-closing-brace-space-after': null,
+        'property-no-vendor-prefix': null,
+        'scss/at-mixin-argumentless-call-parentheses': null,
+        'scss/at-extend-no-missing-placeholder': null,
+        'function-url-quotes': null,
+        'selector-id-pattern': null,
+        'keyframes-name-pattern': null,
+        'scss/at-if-closing-brace-space-after': null,
+        'scss/double-slash-comment-empty-line-before': null,
+        'declaration-block-no-redundant-longhand-properties': null,
+        'string-quotes': null,
     },
 };
