@@ -1,0 +1,29 @@
+type TimeSlotBase {
+  startTime: AWSTime!
+  endTime: AWSTime!
+  dayOfWeek: Int!
+}
+
+type Settings @model @auth(rules: [{allow: groups, groups: ["Admin"], operations: [read, update]}, {allow: private, operations: [read, update], provider: iam}]) {
+  id: ID!
+  ordersPage: AWSURL
+  availableTimes: [TimeSlotBase]
+}
+
+enum OrderType {
+  DELIVERY
+  PICKUP
+  NONE
+}
+
+type TimeSlot @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: private, provider: iam}]) {
+  id: ID!
+  date: AWSDate!
+  startTime: AWSTime!
+  endTime: AWSTime
+  isBooked: Boolean
+  isDisabled: Boolean
+  orderID: ID!
+  type: OrderType
+}
+ 

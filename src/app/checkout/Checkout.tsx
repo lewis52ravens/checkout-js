@@ -25,6 +25,11 @@ import CheckoutStepType from './CheckoutStepType';
 import CheckoutSupport from './CheckoutSupport';
 import { TimeSlot } from '../schedule/ScheduleInfo';
 import { ScheduleSummary } from '../schedule/ScheduleSummary';
+import { OrderType, TimeSlot as TimeSlotAWS } from '../../models';
+import { DataStore } from '@aws-amplify/datastore';
+import Amplify from 'aws-amplify';
+import awsconfig from '../../aws-exports';
+Amplify.configure(awsconfig);
 
 const Billing = lazy(() => retry(() => import(
     /* webpackChunkName: "billing" */
@@ -465,6 +470,7 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
                         onFinalize={ this.navigateToOrderConfirmation }
                         onReady={ this.handleReady }
                         onSubmit={ this.navigateToOrderConfirmation }
+                        withSubmit={ this.handleOrderComplete.bind(this) }
                         onSubmitError={ this.handleError }
                         onUnhandledError={ this.handleUnhandledError }
                     />
@@ -558,6 +564,40 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
         }
 
         this.navigateToStep(activeStep.type, options);
+    };
+
+    private handleOrderComplete: (checkout: CheckoutSelectors) => void = (checkout) => {
+        const { selectedTime } = this.state;
+        const { data } = checkout;
+        let isComplete = data.getOrder()?.isComplete;
+        let checkoutOrderId = data.getCheckout()?.orderId;
+        let orderOrderId = data.getOrder()?.orderId
+        let shippingOption = data.getSelectedShippingOption();
+        let orderType: OrderType;
+        if (shippingOption?.type == 'shipping_pickupinstore') {
+            orderType = OrderType.PICKUP;
+        } else {
+            orderType = OrderType.DELIVERY;
+        }
+
+        const orderId = checkoutOrderId || orderOrderId;
+        if (isComplete && orderId && selectedTime) {
+            let [date, _dateTime] = selectedTime.date.toISOString().split('T');
+            date = date + 'Z';
+            const [_startDate, start] = selectedTime.startTime.toISOString().split('T');
+            const [_endDate, end] = selectedTime.endTime.toISOString().split('T');
+            const slot = new TimeSlotAWS({
+                date: date,
+                startTime: start,
+                endTime: end,
+                isBooked: true,
+                isDisabled: false,
+                orderID: orderId.toString(),
+                type: orderType
+            });
+
+            DataStore.save(slot);
+        }
     };
 
     private navigateToOrderConfirmation: () => void = () => {

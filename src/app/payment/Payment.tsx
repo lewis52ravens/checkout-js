@@ -28,6 +28,7 @@ export interface PaymentProps {
     onSubmit?(): void;
     onSubmitError?(error: Error): void;
     onUnhandledError?(error: Error): void;
+    withSubmit?(checkout: CheckoutSelectors): void;
 }
 
 interface WithCheckoutPaymentProps {
@@ -373,6 +374,7 @@ class Payment extends Component<PaymentProps & WithCheckoutPaymentProps & WithLa
             isPaymentDataRequired,
             onCartChangedError = noop,
             onSubmit = noop,
+            withSubmit = noop,
             onSubmitError = noop,
             submitOrder,
         } = this.props;
@@ -391,7 +393,8 @@ class Payment extends Component<PaymentProps & WithCheckoutPaymentProps & WithLa
         }
 
         try {
-            await submitOrder(mapToOrderRequestBody(values, isPaymentDataRequired()));
+            const selectors = await submitOrder(mapToOrderRequestBody(values, isPaymentDataRequired()));
+            withSubmit(selectors);
             onSubmit();
         } catch (error: any) {
             if (error.type === 'payment_method_invalid') {

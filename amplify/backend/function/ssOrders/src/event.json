@@ -1,0 +1,16 @@
+{
+    "httpMethod": "POST",
+    "path": "/orders",
+    "queryStringParameters": {},
+    "headers": {
+        "order_id": "ORDER1234",
+        "type": "PICKUP",
+        "startTime": 1651528468223,
+        "length": 60
+    },
+    "requestContext": {
+        "identity": {
+            
+        }
+    }
+}

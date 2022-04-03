@@ -1,4 +1,4 @@
-import { createCheckoutService, createEmbeddedCheckoutMessenger, StepTracker } from '@bigcommerce/checkout-sdk';
+import { createCheckoutService, createEmbeddedCheckoutMessenger, createStepTracker, StepTracker } from '@bigcommerce/checkout-sdk';
 import { BrowserOptions } from '@sentry/browser';
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
@@ -10,7 +10,6 @@ import { getLanguageService, LocaleProvider } from '../locale';
 
 import Checkout from './Checkout';
 import CheckoutProvider from './CheckoutProvider';
-import CustomStepTracker from './CustomStepTracker';
 
 export interface CheckoutAppProps {
     checkoutId: string;
@@ -66,7 +65,9 @@ export default class CheckoutApp extends Component<CheckoutAppProps> {
     }
 
     private createStepTracker: () => StepTracker = () => {
-        return new CustomStepTracker();
+        return createStepTracker(this.checkoutService);
+        //return new CustomStepTracker(this.checkoutService);
+        //return createStepTracker(this.checkoutService, stConfig);
         //return createStepTracker(this.checkoutService, stConfig);
     };
 }

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "StoneandSeedAdminPanel2",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/tmp/amplify-2f4a7674-0f22-45cb-8e6e-8f212df75a47/amplify/backend/api/StoneandSeedAdminPanel2/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "keyDescription": "api key description",
+      "expirationTime": 30
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      },
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authStoneandSeedAdminPanel2"
+      }
+    ],
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    }
+  }
+}

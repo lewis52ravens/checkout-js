@@ -11,6 +11,21 @@
       "StackId": "arn:aws:cloudformation:us-east-1:238468526325:stack/amplify-stoneandseedadminpan-staging-15030/f43be1d0-abdd-11ec-9b22-0ed4e579ea4f",
       "AmplifyAppId": "d1o2n6u270ghp",
       "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-stoneandseedadminpan-staging-15030-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "StoneandSeedAdminPanel2": {}
+      },
+      "function": {
+        "ssOrders": {
+          "deploymentBucketName": "amplify-stoneandseedadminpan-staging-15030-deployment",
+          "s3Key": "amplify-builds/ssOrders-5678394175514f4d6134-build.zip"
+        },
+        "ssTimeslots": {
+          "deploymentBucketName": "amplify-stoneandseedadminpan-staging-15030-deployment",
+          "s3Key": "amplify-builds/ssTimeslots-7762384c58484570455a-build.zip"
+        }
+      }
     }
   }
 }

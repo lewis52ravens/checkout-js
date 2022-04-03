@@ -41,8 +41,8 @@ class OrderConfirmationApp extends Component<OrderConfirmationAppProps> {
     }
 
     componentDidMount(): void {
-        const { containerId } = this.props;
-
+        const { containerId, orderId } = this.props;
+        console.log('OrderID: ' + orderId);
         ReactModal.setAppElement(`#${containerId}`);
     }
 
@@ -80,6 +80,7 @@ class OrderConfirmationApp extends Component<OrderConfirmationAppProps> {
     };
 
     private createStepTracker: () => StepTracker = () => {
+        //return new ListeningStepTracker(this.checkoutService);
         return createStepTracker(this.checkoutService);
     };
 }

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "api": {
+      "StoneandSeedAdminPanel2": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "auth": {
+      "StoneandSeedAdminPanel2": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "StoneandSeedAdminPanel2",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authStoneandSeedAdminPanel2",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2022-03-25T20:56:30.750Z"
+}
