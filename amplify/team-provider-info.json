@@ -1,0 +1,16 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-stoneandseedadminpan-staging-15030-authRole",
+      "UnauthRoleArn": "arn:aws:iam::238468526325:role/amplify-stoneandseedadminpan-staging-15030-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::238468526325:role/amplify-stoneandseedadminpan-staging-15030-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-stoneandseedadminpan-staging-15030-deployment",
+      "UnauthRoleName": "amplify-stoneandseedadminpan-staging-15030-unauthRole",
+      "StackName": "amplify-stoneandseedadminpan-staging-15030",
+      "StackId": "arn:aws:cloudformation:us-east-1:238468526325:stack/amplify-stoneandseedadminpan-staging-15030/f43be1d0-abdd-11ec-9b22-0ed4e579ea4f",
+      "AmplifyAppId": "d1o2n6u270ghp",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-stoneandseedadminpan-staging-15030-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    }
+  }
+}
