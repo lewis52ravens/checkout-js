@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "StoneandSeedAdminPanel2",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-2f4a7674-0f22-45cb-8e6e-8f212df75a47/amplify/backend/api/StoneandSeedAdminPanel2/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-44d8a935-7154-4011-b585-5eac0514e16a/amplify/backend/api/StoneandSeedAdminPanel2/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

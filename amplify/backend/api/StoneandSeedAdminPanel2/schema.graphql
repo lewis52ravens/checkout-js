@@ -1,13 +1,21 @@
+type OrderTypeWeight {
+  orderType: OrderType!
+  weight: Int!
+}
+
 type TimeSlotBase {
   startTime: AWSTime!
   endTime: AWSTime!
   dayOfWeek: Int!
 }
 
-type Settings @model @auth(rules: [{allow: groups, groups: ["Admin"], operations: [read, update]}, {allow: private, operations: [read, update], provider: iam}]) {
+type Settings @model @auth(rules: [{allow: groups, groups: ["Admin"], operations: [read, update]}, {allow: private, operations: [read, update], provider: iam}, {allow: public, operations: [create, read, update]}]) {
   id: ID!
   ordersPage: AWSURL
   availableTimes: [TimeSlotBase]
+  timeSlotDuration: Int!
+  ordersPerSlot: Int!
+  orderTypeWeights: [OrderTypeWeight!]
 }
 
 enum OrderType {
@@ -16,7 +24,7 @@ enum OrderType {
   NONE
 }
 
-type TimeSlot @model @auth(rules: [{allow: public, operations: [read]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: private, provider: iam}]) {
+type TimeSlot @model @auth(rules: [{allow: public, operations: [read, create, update]}, {allow: groups, groups: ["Admin"], operations: [read, create, update, delete]}, {allow: private, provider: iam}]) {
   id: ID!
   date: AWSDate!
   startTime: AWSTime!

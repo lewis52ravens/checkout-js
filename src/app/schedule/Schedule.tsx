@@ -6,10 +6,12 @@ import { withCheckout, CheckoutContextProps } from '../checkout';
 //import { LoadingOverlay } from '../ui/loading';
 import ScheduleFormFooter, { ScheduleFormValues } from './ScheduleFormFooter';
 import './Schedule.scss';
-import ScheduleInfo, { TimeSlot } from './ScheduleInfo';
+//import ScheduleInfoTest from './ScheduleInfoTest';
 import TimeSlotSelector from './TimeSlotSelector';
 import { Col, Container, Row } from 'react-bootstrap';
 import { noop } from 'lodash';
+import ScheduleInfo, { TimeSlot } from './ScheduleInfo';
+import ScheduleInfoFromAmplify from './ScheduleInfoFromAmplify';
 //import 'react-calendar/dist/Calendar.css';
 
 // import { getShippableItemsCount } from '../shipping';
@@ -49,7 +51,7 @@ class Schedule extends Component<ScheduleProps & WithCheckoutScheduleProps, Sche
 
     constructor(props: any) {
         super(props);
-        this.schedule = new ScheduleInfo();
+        this.schedule = new ScheduleInfoFromAmplify();
         
         if (this.props.timeSlot) {
             this.state = {

@@ -1,30 +1,8 @@
+import { DataStore } from '@aws-amplify/datastore';
+import { TimeSlot as TimeSlotAWS } from '../../models';
+import ScheduleInfo, { Month, Day, TimeSlot, MonthSymbol } from './ScheduleInfo';
 
-export interface TimeSlot {
-    date: Date;
-    startTime: Date;
-    endTime: Date;
-    isAvailable: boolean;
-    displayString: string;
-}
-
-export interface Day {
-    isEnabled: boolean;
-    timeSlots: TimeSlot[];
-    hasAvailableSlots: boolean;
-}
-
-export interface Month {
-    year: number;
-    value: number;
-    days: Day[];
-}
-
-interface MonthSymbol {
-    year: number;
-    value: number;
-}
-
-export default class ScheduleInfo {
+export default class ScheduleInfoTest implements ScheduleInfo {
     
     staleLimit: 30000 = 30000;
     staleTimer: 8000 = 8000;
@@ -37,6 +15,9 @@ export default class ScheduleInfo {
     updateCounter: number;
     
     constructor() {
+        DataStore.observe(TimeSlotAWS).subscribe(msg => {
+            console.log(msg.model, msg.opType, msg.element);
+        })
         this.hasData = false;
         this.isStale = true;
         this.lastUpdate = -1 * this.staleLimit;

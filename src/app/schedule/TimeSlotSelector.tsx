@@ -7,15 +7,19 @@ import { TimeSlot } from "./ScheduleInfo";
 
 
 export interface TimeSlotProps {
-    selectedDate?: Date;
     selectedTime?: TimeSlot;
+    selectedDate?: Date;
     shippingOption?: ShippingOption;
     hasData: boolean;
     onSelectTimeSlot(slot: TimeSlot): void;
     getTimeSlotsForDate(date: Date): TimeSlot[];
 }
 
-class TimeSlotSelector extends Component<TimeSlotProps> {
+interface TimeSlotState {
+    
+}
+
+class TimeSlotSelector extends Component<TimeSlotProps, TimeSlotState> {
 
     constructor(props: any) {
         super(props);
@@ -28,8 +32,8 @@ class TimeSlotSelector extends Component<TimeSlotProps> {
 
     render(): ReactNode {
         const {
-            selectedDate,
             selectedTime,
+            selectedDate,
             shippingOption,
             hasData,
             onSelectTimeSlot,
@@ -47,13 +51,14 @@ class TimeSlotSelector extends Component<TimeSlotProps> {
                 </ListGroupItem>
             )]
         } else if (selectedDate) {
+            const timestamp = selectedDate.valueOf();
             const slots = getTimeSlotsForDate(selectedDate);
             listItems = slots.map((slot) => {
                 const active = _.isEqual(slot, selectedTime);
                 return (
                     <ListGroupItem
                         as='a'
-                        key={ slot.startTime.valueOf() }
+                        key={ `${timestamp}:${slot.startTime.valueOf()}` }
                         disabled={ !slot.isAvailable }
                         action
                         active={ active }

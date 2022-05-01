@@ -6,6 +6,12 @@ export enum OrderType {
   NONE = "NONE"
 }
 
+export declare class OrderTypeWeight {
+  readonly orderType: OrderType | keyof typeof OrderType;
+  readonly weight: number;
+  constructor(init: ModelInit<OrderTypeWeight>);
+}
+
 export declare class TimeSlotBase {
   readonly startTime: string;
   readonly endTime: string;
@@ -25,6 +31,9 @@ export declare class Settings {
   readonly id: string;
   readonly ordersPage?: string | null;
   readonly availableTimes?: (TimeSlotBase | null)[] | null;
+  readonly timeSlotDuration: number;
+  readonly ordersPerSlot: number;
+  readonly orderTypeWeights?: OrderTypeWeight[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Settings, SettingsMetaData>);

@@ -27,6 +27,30 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "timeSlotDuration": {
+                    "name": "timeSlotDuration",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "ordersPerSlot": {
+                    "name": "ordersPerSlot",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "orderTypeWeights": {
+                    "name": "orderTypeWeights",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "OrderTypeWeight"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -74,6 +98,14 @@ export const schema = {
                                     "update"
                                 ],
                                 "provider": "iam"
+                            },
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "read",
+                                    "update"
+                                ]
                             }
                         ]
                     }
@@ -172,7 +204,9 @@ export const schema = {
                             {
                                 "allow": "public",
                                 "operations": [
-                                    "read"
+                                    "read",
+                                    "create",
+                                    "update"
                                 ]
                             },
                             {
@@ -216,6 +250,27 @@ export const schema = {
         }
     },
     "nonModels": {
+        "OrderTypeWeight": {
+            "name": "OrderTypeWeight",
+            "fields": {
+                "orderType": {
+                    "name": "orderType",
+                    "isArray": false,
+                    "type": {
+                        "enum": "OrderType"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "weight": {
+                    "name": "weight",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                }
+            }
+        },
         "TimeSlotBase": {
             "name": "TimeSlotBase",
             "fields": {
@@ -243,5 +298,5 @@ export const schema = {
             }
         }
     },
-    "version": "e6d549187d6975cf75cc70dc4582275f"
+    "version": "dd26e5b760e62926c2fdcd024ee8377a"
 };

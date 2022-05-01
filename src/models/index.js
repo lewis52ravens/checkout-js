@@ -8,11 +8,12 @@ const OrderType = {
   "NONE": "NONE"
 };
 
-const { Settings, TimeSlot, TimeSlotBase } = initSchema(schema);
+const { Settings, TimeSlot, OrderTypeWeight, TimeSlotBase } = initSchema(schema);
 
 export {
   Settings,
   TimeSlot,
   OrderType,
+  OrderTypeWeight,
   TimeSlotBase
 };

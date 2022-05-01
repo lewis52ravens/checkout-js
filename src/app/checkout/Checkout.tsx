@@ -27,7 +27,8 @@ import { TimeSlot } from '../schedule/ScheduleInfo';
 import { ScheduleSummary } from '../schedule/ScheduleSummary';
 import { OrderType, TimeSlot as TimeSlotAWS } from '../../models';
 import { DataStore } from '@aws-amplify/datastore';
-import Amplify from 'aws-amplify';
+import Amplify from '@aws-amplify/core';
+//@ts-ignore
 import awsconfig from '../../aws-exports';
 Amplify.configure(awsconfig);
 
@@ -583,9 +584,12 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
         const orderId = checkoutOrderId || orderOrderId;
         if (isComplete && orderId && selectedTime) {
             let [date, _dateTime] = selectedTime.date.toISOString().split('T');
-            date = date + 'Z';
-            const [_startDate, start] = selectedTime.startTime.toISOString().split('T');
-            const [_endDate, end] = selectedTime.endTime.toISOString().split('T');
+            const [_startDate, startTime] = selectedTime.startTime.toISOString().split('T');
+            const [_endDate, endTime] = selectedTime.endTime.toISOString().split('T');
+            const [startHour, startMin, _startRest] = startTime.split(':');
+            const [endHour, endMin, _endRest] = endTime.split(':');
+            const start = `${startHour}:${startMin}`;
+            const end = `${endHour}:${endMin}`;
             const slot = new TimeSlotAWS({
                 date: date,
                 startTime: start,
@@ -595,7 +599,6 @@ class Checkout extends Component<CheckoutProps & WithCheckoutProps & WithLanguag
                 orderID: orderId.toString(),
                 type: orderType
             });
-
             DataStore.save(slot);
         }
     };

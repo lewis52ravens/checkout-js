@@ -5,7 +5,6 @@
     ],
     "exclude": [
         "node_modules",
-        "src/aws-exports.js",
     ],
     "compilerOptions": {
         "strictNullChecks": true,
@@ -32,8 +31,6 @@
         "resolveJsonModule": true,
         "noUnusedParameters": true,
         "noUnusedLocals": true,
-        "allowJs": true,
-        "outDir": "./"
     },
     "files": [
         "types/card-validator.d.ts",
